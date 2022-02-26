@@ -1,0 +1,33 @@
+name: SanctionSet
+version: 1.0.0
+author: Farmeurimmo
+main: main.java.fr.farmeurimmo.sanctionset.SanctionMain
+commands:
+  ss:
+    description: Open sanctiongui
+    aliases: [ sanction, sanctionset ]
+    permission: ss
+  ssadmin:
+    description: Admin command
+    permission: ssadmin
+  report:
+    description: Report command
+    permission: report
+  vanish:
+    description: Vanish command
+    aliases: [ v ]
+    permission: vanish
+  ban:
+    permission: ban
+  tempban:
+    permission: tempban
+  ban-ip:
+    permission: ban-ip
+  mute:
+    permission: mute
+  unmute:
+    permission: unmute
+  tempmute:
+    permission: tempmute
+  unban:
+    permission: unban
