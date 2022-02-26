@@ -23,6 +23,7 @@ public class TempBanCmd implements CommandExecutor {
             if (args.length == 0 || args.length == 1) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));
+                return true;
             } else if (args.length >= 2) {
                 StringBuilder sb = new StringBuilder();
                 for (String s : args) {
@@ -81,14 +82,16 @@ public class TempBanCmd implements CommandExecutor {
                         ApplySanction.instance.ApplyTempBan(args[0], reason, sender,
                                 TimeConverter.getFormatTimeWithTZ(Mydate), endDate.format(formatter), args[1].replace(type, ""),
                                 type);
-
+                        return true;
                     } else {
                         sender.sendMessage(SanctionMain.instance.Preffix +
                                 SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));
+                        return true;
                     }
                 } else {
                     sender.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));
+                    return true;
                 }
             }
         }

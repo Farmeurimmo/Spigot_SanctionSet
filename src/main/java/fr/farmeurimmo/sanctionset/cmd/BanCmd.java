@@ -21,6 +21,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
             if (args.length == 0) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorBanArg").replace("&", "§"));
+                return true;
             } else if (args.length == 1) {
                 Date Mydate = new Date(System.currentTimeMillis());
                 Player p = Bukkit.getPlayer(args[0]);
@@ -37,6 +38,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                 }
                 ApplySanction.instance.ApplyPermaBan(p, reason, sender.getName(),
                         TimeConverter.getFormatTimeWithTZ(Mydate));
+                return true;
             } else if (args.length >= 2) {
                 if (Bukkit.getPlayer(args[0]) != null) {
                     Player p = Bukkit.getPlayer(args[0]);
@@ -54,9 +56,11 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                     Date Mydate = new Date(System.currentTimeMillis());
                     ApplySanction.instance.ApplyPermaBan(p, reason, sender.getName(),
                             TimeConverter.getFormatTimeWithTZ(Mydate));
+                    return true;
                 } else {
                     sender.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.InvalidPlayer").replace("&", "§"));
+                    return true;
                 }
             }
         }

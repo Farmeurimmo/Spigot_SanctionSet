@@ -21,8 +21,10 @@ public class UnBanCmd implements CommandExecutor, TabCompleter {
             if (args.length == 0 || args.length >= 2) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorUnBanArg").replace("&", "§"));
+                return true;
             } else if (args.length == 1) {
                 BanRevoker.UnTempBan(args[0], sender);
+                return true;
             }
         }
         return false;

@@ -36,13 +36,16 @@ public class SsCmd implements CommandExecutor, TabCompleter {
                         if (args.length == 1) {
                             SsGui.SsMainGui(player, args[0]);
                         }
+                        return true;
                     } else {
                         player.sendMessage(SanctionMain.instance.Preffix +
                                 SanctionMain.instance.getConfig().getString("SanctionSet.Settings.InvalidPlayer").replace("&", "§"));
+                        return true;
                     }
                 } else {
                     player.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.NoPermission").replace("&", "§"));
+                    return true;
                 }
             }
         }

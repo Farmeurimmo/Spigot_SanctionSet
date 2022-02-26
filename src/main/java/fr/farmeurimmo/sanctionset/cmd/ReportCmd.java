@@ -23,23 +23,26 @@ public class ReportCmd implements CommandExecutor, TabCompleter {
             if (args.length == 0) {
                 player.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.ErrorArg").replace("&", "§"));
+                return true;
             }
             if (args.length >= 2) {
                 player.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.ErrorArg").replace("&", "§"));
+                return true;
             }
-            if (args.length == 1) {
                 if (Bukkit.getOfflinePlayer(args[0]).isOnline()) {
                     if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Report.Enabled")) {
                         ReportGui.MakeReportGui(player, args[0]);
+                        return true;
                     } else {
                         player.sendMessage(SanctionMain.instance.Preffix +
                                 SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Disabled").replace("&", "§"));
+                        return true;
                     }
                 } else {
                     player.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.PlayerNotonline").replace("&", "§"));
-                }
+                    return true;
             }
         }
         return false;

@@ -14,6 +14,7 @@ public class TempMuteCmd implements CommandExecutor {
             if (args.length == 0 || args.length == 1) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempMuteArg").replace("&", "§"));
+                return true;
             } else if (args.length >= 2) {
                 StringBuilder sb = new StringBuilder();
                 for (String s : args) {
@@ -40,14 +41,17 @@ public class TempMuteCmd implements CommandExecutor {
                         }
                         ApplySanction.instance.ApplyTempMute(args[0], reason.trim(),
                                 sender, cb.toString(), type.replace(cb, ""));
+                        return true;
 
                     } else {
                         sender.sendMessage(SanctionMain.instance.Preffix +
                                 SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempMuteArg").replace("&", "§"));
+                        return true;
                     }
                 } else {
                     sender.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempMuteArg").replace("&", "§"));
+                    return true;
                 }
             }
         }

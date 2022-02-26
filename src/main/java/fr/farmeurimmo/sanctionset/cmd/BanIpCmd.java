@@ -22,6 +22,7 @@ public class BanIpCmd implements CommandExecutor {
             if (args.length == 0) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorBanIpArg").replace("&", "§"));
+                return true;
             } else if (args.length == 1) {
                 Player p = Bukkit.getPlayer(args[0]);
                 StringBuilder sb = new StringBuilder();
@@ -40,6 +41,7 @@ public class BanIpCmd implements CommandExecutor {
                         TimeConverter.getFormatTimeWithTZ(Mydate));
                 Bukkit.getBanList(Type.IP).addBan(p.getAddress().getHostName(), reason,
                         null, sender.getName());
+                return true;
             } else if (args.length >= 2) {
                 Player p = Bukkit.getPlayer(args[0]);
                 StringBuilder sb = new StringBuilder();
@@ -56,9 +58,11 @@ public class BanIpCmd implements CommandExecutor {
                 Date Mydate = new Date(System.currentTimeMillis());
                 ApplySanction.instance.ApplyPermaBanIp(p, reason, sender.getName(),
                         TimeConverter.getFormatTimeWithTZ(Mydate));
+                return true;
             }
+            return true;
         }
-        return false;
+        return true;
     }
 
 }

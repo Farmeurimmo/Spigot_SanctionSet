@@ -23,7 +23,6 @@ public class VanishCmd implements CommandExecutor, TabCompleter {
         if (sender instanceof Player) {
             if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.Enabled") == true) {
                 Player p = (Player) sender;
-                if (p.hasPermission("vanish")) {
                     if (SanctionMain.vanished.contains(p)) {
                         for (Player players : Bukkit.getOnlinePlayers()) {
                             players.showPlayer(p);
@@ -56,6 +55,7 @@ public class VanishCmd implements CommandExecutor, TabCompleter {
                         }
                         SanctionMain.vanished.remove(p);
                         p.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Vanish.Isoff").replace("&", "§"));
+                        return true;
                     } else {
                         for (Player players : Bukkit.getOnlinePlayers()) {
                             players.hidePlayer(p);
@@ -78,17 +78,16 @@ public class VanishCmd implements CommandExecutor, TabCompleter {
                             }
                         }
                         if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.Fly") == true) {
-                            if (p.getAllowFlight() == true) {
-                            } else {
+                            if (p.getAllowFlight() == false){
                                 p.setAllowFlight(true);
                                 p.setFlying(true);
                             }
-                        }
                     }
+                        return true;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     @Override

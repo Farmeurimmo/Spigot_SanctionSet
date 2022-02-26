@@ -18,27 +18,30 @@ public class SsAdminCmd implements CommandExecutor, TabCompleter {
             sender.sendMessage(SanctionMain.instance.Preffix +
                     SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorArgAdminCommands").replace("&", "§"));
             sender.sendMessage("Subs commands available: infos, reload, rl");
+            return true;
         }
         if (args.length >= 2) {
             sender.sendMessage(SanctionMain.instance.Preffix +
                     SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorArgAdminCommands").replace("&", "§"));
             sender.sendMessage("Subs commands available: infos, reload, rl");
+            return true;
         }
-        if (args.length == 1) {
             if (args[0].equalsIgnoreCase("reload")) {
                 SanctionMain.instance.reloadConfig();
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ReloadMessage").replace("&", "§"));
+                return true;
             }
             if (args[0].equalsIgnoreCase("rl")) {
                 SanctionMain.instance.reloadConfig();
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ReloadMessage").replace("&", "§"));
+                return true;
             } else if (args[0].equalsIgnoreCase("infos")) {
                 sender.sendMessage("Plugin developper: Farmeurimmo#0462");
                 sender.sendMessage("Email: farmeurimmo@gmail.com");
                 sender.sendMessage("Version: beta/1.0.0");
-            }
+                return true;
         }
         return false;
     }
