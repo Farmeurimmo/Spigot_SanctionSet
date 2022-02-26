@@ -18,7 +18,7 @@ public class BanIpCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender.hasPermission("banip")) {
-            Calendar calendar = Calendar.instance;
+            Calendar calendar = Calendar.getInstance();
             if (args.length == 0) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorBanIpArg").replace("&", "§"));

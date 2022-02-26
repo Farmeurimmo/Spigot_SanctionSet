@@ -19,7 +19,7 @@ public class TempBanCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender.hasPermission("tempban")) {
-            Calendar calendar = Calendar.instance;
+            Calendar calendar = Calendar.getInstance();
             if (args.length == 0 || args.length == 1) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));

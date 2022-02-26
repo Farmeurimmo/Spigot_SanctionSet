@@ -17,7 +17,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender.hasPermission("ban")) {
-            Calendar calendar = Calendar.instance;
+            Calendar calendar = Calendar.getInstance();
             if (args.length == 0) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorBanArg").replace("&", "§"));
