@@ -78,7 +78,7 @@ public class BanGui {
             inv.setItem(17, custom12);
 
             if (player.hasPermission("mod+")) {
-                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForAdmin") == true) {
+                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForAdmin")) {
                     ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                     ItemMeta meta = stack.getItemMeta();
                     ((SkullMeta) meta).setOwner(cible);

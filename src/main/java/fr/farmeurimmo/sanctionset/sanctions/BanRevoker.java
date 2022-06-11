@@ -9,12 +9,12 @@ public class BanRevoker {
     @SuppressWarnings("deprecation")
     public static void CheckForUnban() {
         for (String aa : SanctionMain.instance.getData().getConfigurationSection("").getKeys(false)) {
-            if (SanctionMain.instance.getData().getBoolean(aa + ".tempban.istempbanned") == true) {
+            if (SanctionMain.instance.getData().getBoolean(aa + ".tempban.istempbanned")) {
                 if (SanctionMain.instance.getData().getLong(aa + ".tempban.timemillis") <= System.currentTimeMillis()) {
                     UnTempBan(aa, Bukkit.getConsoleSender());
                 }
             }
-            if (SanctionMain.instance.getData().getBoolean(aa + ".tempmute.istempmuted") == true) {
+            if (SanctionMain.instance.getData().getBoolean(aa + ".tempmute.istempmuted")) {
                 if (SanctionMain.instance.getData().getLong(aa + ".tempmute.timemillis") <= System.currentTimeMillis()) {
                     MuteRevoker.revokepermamute(aa, Bukkit.getConsoleSender());
                 }
@@ -28,9 +28,9 @@ public class BanRevoker {
     }
 
     public static void UnTempBan(String aa, CommandSender sender) {
-        if (SanctionMain.instance.getData().getBoolean(aa + ".ban.isbanned") == true ||
-                SanctionMain.instance.getData().getBoolean(aa + ".tempban.istempbanned") == true
-                || SanctionMain.instance.getData().getBoolean(aa + ".ban.isipbanned") == true) {
+        if (SanctionMain.instance.getData().getBoolean(aa + ".ban.isbanned") ||
+                SanctionMain.instance.getData().getBoolean(aa + ".tempban.istempbanned")
+                || SanctionMain.instance.getData().getBoolean(aa + ".ban.isipbanned")) {
             SanctionMain.instance.getData().set(aa + ".tempban.banner", "");
             SanctionMain.instance.getData().set(aa + ".tempban.reason", "");
             SanctionMain.instance.getData().set(aa + ".tempban.date", "");

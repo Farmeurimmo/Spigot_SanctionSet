@@ -30,19 +30,19 @@ public class ReportCmd implements CommandExecutor, TabCompleter {
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.ErrorArg").replace("&", "§"));
                 return true;
             }
-                if (Bukkit.getOfflinePlayer(args[0]).isOnline()) {
-                    if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Report.Enabled")) {
-                        ReportGui.MakeReportGui(player, args[0]);
-                        return true;
-                    } else {
-                        player.sendMessage(SanctionMain.instance.Preffix +
-                                SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Disabled").replace("&", "§"));
-                        return true;
-                    }
+            if (Bukkit.getOfflinePlayer(args[0]).isOnline()) {
+                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Report.Enabled")) {
+                    ReportGui.MakeReportGui(player, args[0]);
+                    return true;
                 } else {
                     player.sendMessage(SanctionMain.instance.Preffix +
-                            SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.PlayerNotonline").replace("&", "§"));
+                            SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Disabled").replace("&", "§"));
                     return true;
+                }
+            } else {
+                player.sendMessage(SanctionMain.instance.Preffix +
+                        SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.PlayerNotonline").replace("&", "§"));
+                return true;
             }
         }
         return false;
@@ -50,7 +50,7 @@ public class ReportCmd implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ArrayList<String> subcmd = new ArrayList<String>();
+        ArrayList<String> subcmd = new ArrayList<>();
         if (cmd.getName().equalsIgnoreCase("report")) {
             if (args.length == 1) {
                 for (Player player : Bukkit.getOnlinePlayers()) {

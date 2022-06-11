@@ -27,13 +27,12 @@ public class MuteCmd implements CommandExecutor, TabCompleter {
                     Player p = Bukkit.getPlayer(args[0]);
                     String reason = SanctionMain.instance.getConfig().getString("SanctionSet.Settings.UnkownReasonSpecified").replace("&", "§");
                     ApplySanction.instance.ApplyPermaMute(p.getName(), reason.trim(), sender.getName(), sender);
-                    return true;
                 } else {
                     sender.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.InvalidPlayer").replace("&", "§"));
-                    return true;
                 }
-            } else if (args.length >= 2) {
+                return true;
+            } else {
                 if (Bukkit.getPlayer(args[0]) != null) {
                     Player p = Bukkit.getPlayer(args[0]);
                     StringBuilder sb = new StringBuilder();
@@ -55,7 +54,7 @@ public class MuteCmd implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ArrayList<String> subcmd = new ArrayList<String>();
+        ArrayList<String> subcmd = new ArrayList<>();
         if (cmd.getName().equalsIgnoreCase("mute")) {
             if (args.length == 1) {
                 for (Player player : Bukkit.getOnlinePlayers()) {

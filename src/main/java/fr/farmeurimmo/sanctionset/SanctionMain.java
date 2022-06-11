@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class SanctionMain extends JavaPlugin implements Listener {
 
     public static SanctionMain instance;
-    public static ArrayList<Player> vanished = new ArrayList<Player>();
+    public static ArrayList<Player> vanished = new ArrayList<>();
     public static String aaa = "";
     public FileConfiguration data;
     public File dfile;

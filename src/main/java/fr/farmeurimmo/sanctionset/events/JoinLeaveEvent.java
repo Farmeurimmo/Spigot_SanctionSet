@@ -68,18 +68,17 @@ public class JoinLeaveEvent implements Listener {
                     .replace("%reason%", SanctionMain.instance.getData().getString(e.getName() + ".ban-ip.reason")));
             return;
         }
-        if (SanctionMain.instance.getData().getBoolean(e.getName() + ".ban.isbanned") == true) {
+        if (SanctionMain.instance.getData().getBoolean(e.getName() + ".ban.isbanned")) {
             e.disallow(Result.KICK_BANNED, SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Ban.lines").replace("&", "§")
                     .replace("%banner%", SanctionMain.instance.getData().getString(e.getName() + ".ban.banner"))
                     .replace("%date%", SanctionMain.instance.getData().getString(e.getName() + ".ban.date").replace("T", " "))
                     .replace("%reason%", SanctionMain.instance.getData().getString(e.getName() + ".ban.reason")));
             return;
         }
-        if (SanctionMain.instance.getData().getBoolean(e.getName() + ".tempban.istempbanned") == true) {
+        if (SanctionMain.instance.getData().getBoolean(e.getName() + ".tempban.istempbanned")) {
             String aaaa = SanctionMain.instance.getData().getString(e.getName() + ".tempban.expiration");
             if (SanctionMain.instance.getData().getLong(e.getName() + ".tempban.timemillis") <= System.currentTimeMillis()) {
                 BanRevoker.UnTempBan(e.getName(), Bukkit.getConsoleSender());
-                return;
             } else {
                 e.disallow(Result.KICK_BANNED, SanctionMain.instance.getConfig().getString("SanctionSet.Settings.TempBan.lines").replace("&", "§")
                         .replace("%banner%", SanctionMain.instance.getData().getString(e.getName() + ".tempban.banner"))
@@ -89,7 +88,6 @@ public class JoinLeaveEvent implements Listener {
                         .replace("%duration%", SanctionMain.instance.getData().getString(e.getName() + ".tempban.duration") +
                                 SanctionMain.instance.getData().getString(e.getName() + ".tempban.unit").replace("sec", " second(s)").replace("min", " minute(s)")
                                         .replace("day", " day(s)").replace("hour", " hour(s)").replace("year", " year(s)")));
-                return;
             }
         }
     }

@@ -21,70 +21,69 @@ public class VanishCmd implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] arg3) {
         if (sender instanceof Player) {
-            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.Enabled") == true) {
+            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.Enabled")) {
                 Player p = (Player) sender;
-                    if (SanctionMain.vanished.contains(p)) {
-                        for (Player players : Bukkit.getOnlinePlayers()) {
-                            players.showPlayer(p);
-                            p.removePotionEffect(PotionEffectType.INVISIBILITY);
-                            if (p.getGameMode() == GameMode.ADVENTURE) {
-                                p.setAllowFlight(false);
-                            }
-                            if (p.getGameMode() == GameMode.SURVIVAL) {
-                                p.setAllowFlight(false);
-                            }
-                            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.ExitGamemode") == true) {
-                                if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 1) {
-                                    p.setGameMode(GameMode.CREATIVE);
-                                    p.setAllowFlight(true);
-                                    p.setFlying(true);
-                                }
-                                if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 2) {
-                                    p.setGameMode(GameMode.ADVENTURE);
-                                }
-                                if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 3) {
-                                    p.setGameMode(GameMode.SPECTATOR);
-                                    p.setAllowFlight(true);
-                                    p.setFlying(true);
-
-                                }
-                                if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 0) {
-                                    p.setGameMode(GameMode.SURVIVAL);
-                                }
-                            }
+                if (SanctionMain.vanished.contains(p)) {
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        players.showPlayer(p);
+                        p.removePotionEffect(PotionEffectType.INVISIBILITY);
+                        if (p.getGameMode() == GameMode.ADVENTURE) {
+                            p.setAllowFlight(false);
                         }
-                        SanctionMain.vanished.remove(p);
-                        p.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Vanish.Isoff").replace("&", "§"));
-                        return true;
-                    } else {
-                        for (Player players : Bukkit.getOnlinePlayers()) {
-                            players.hidePlayer(p);
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000000, 1));
+                        if (p.getGameMode() == GameMode.SURVIVAL) {
+                            p.setAllowFlight(false);
                         }
-                        SanctionMain.vanished.add(p);
-                        p.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Vanish.Ison").replace("&", "§"));
-                        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.ChangeGamemode") == true) {
-                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 1) {
+                        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.ExitGamemode")) {
+                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 1) {
                                 p.setGameMode(GameMode.CREATIVE);
-                            }
-                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 2) {
-                                p.setGameMode(GameMode.ADVENTURE);
-                            }
-                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 3) {
-                                p.setGameMode(GameMode.SPECTATOR);
-                            }
-                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 0) {
-                                p.setGameMode(GameMode.SURVIVAL);
-                            }
-                        }
-                        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.Fly") == true) {
-                            if (p.getAllowFlight() == false){
                                 p.setAllowFlight(true);
                                 p.setFlying(true);
                             }
+                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 2) {
+                                p.setGameMode(GameMode.ADVENTURE);
+                            }
+                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 3) {
+                                p.setGameMode(GameMode.SPECTATOR);
+                                p.setAllowFlight(true);
+                                p.setFlying(true);
+
+                            }
+                            if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.ExGamemode") == 0) {
+                                p.setGameMode(GameMode.SURVIVAL);
+                            }
+                        }
                     }
-                        return true;
+                    SanctionMain.vanished.remove(p);
+                    p.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Vanish.Isoff").replace("&", "§"));
+                } else {
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        players.hidePlayer(p);
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000000, 1));
+                    }
+                    SanctionMain.vanished.add(p);
+                    p.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Vanish.Ison").replace("&", "§"));
+                    if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.ChangeGamemode")) {
+                        if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 1) {
+                            p.setGameMode(GameMode.CREATIVE);
+                        }
+                        if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 2) {
+                            p.setGameMode(GameMode.ADVENTURE);
+                        }
+                        if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 3) {
+                            p.setGameMode(GameMode.SPECTATOR);
+                        }
+                        if (SanctionMain.instance.getConfig().getInt("SanctionSet.Settings.Vanish.Gamemode") == 0) {
+                            p.setGameMode(GameMode.SURVIVAL);
+                        }
+                    }
+                    if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.Vanish.Fly")) {
+                        if (!p.getAllowFlight()) {
+                            p.setAllowFlight(true);
+                            p.setFlying(true);
+                        }
+                    }
                 }
+                return true;
             }
         }
         return true;
@@ -92,12 +91,10 @@ public class VanishCmd implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ArrayList<String> subcmd = new ArrayList<String>();
+        ArrayList<String> subcmd = new ArrayList<>();
         if (cmd.getName().equalsIgnoreCase("vanish")) {
-            if (args.length >= 0) {
-                subcmd.add("");
-                Collections.sort(subcmd);
-            }
+            subcmd.add("");
+            Collections.sort(subcmd);
         }
         return subcmd;
     }

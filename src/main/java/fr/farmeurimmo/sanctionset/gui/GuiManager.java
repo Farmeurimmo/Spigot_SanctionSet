@@ -20,9 +20,6 @@ public class GuiManager implements Listener {
         ItemStack current = event.getCurrentItem();
         Material currenttype = current.getType();
 
-        if (current == null) {
-            return;
-        }
         if (current.getItemMeta() == null) {
             return;
         }
@@ -256,7 +253,7 @@ public class GuiManager implements Listener {
                 }
                 break;
             default:
-                if(!title.equalsIgnoreCase("§4Report "+cible)){
+                if (!title.equalsIgnoreCase("§4Report " + cible)) {
                     return;
                 }
                 event.setCancelled(true);
@@ -265,50 +262,24 @@ public class GuiManager implements Listener {
 
                 switch (currenttype) {
                     case GRASS:
-                        player.sendMessage(SanctionMain.instance.Preffix + SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.sended").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason));
-                        player.closeInventory();
-                        for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-                            bc.append(part + " ");
-                            if (all.hasPermission("reportview")) {
-                                all.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Obtain").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason).replace("%sender%", player.getName()));
-                                bc.delete(0, 100);
-                            }
-                        }
-                        break;
                     case DIAMOND_SWORD:
-                        player.sendMessage(SanctionMain.instance.Preffix + SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.sended").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason));
-                        player.closeInventory();
-                        for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-                            bc.append(part + " ");
-                            if (all.hasPermission("reportview")) {
-                                all.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Obtain").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason).replace("%sender%", player.getName()));
-                                bc.delete(0, 100);
-                            }
-                        }
-                        break;
                     case APPLE:
-                        player.sendMessage(SanctionMain.instance.Preffix + SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.sended").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason));
-                        player.closeInventory();
-                        for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-                            bc.append(part + " ");
-                            if (all.hasPermission("reportview")) {
-                                all.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Obtain").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason).replace("%sender%", player.getName()));
-                                bc.delete(0, 100);
-                            }
-                        }
-                        break;
                     case BEACON:
-                        player.sendMessage(SanctionMain.instance.Preffix + SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.sended").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason));
-                        player.closeInventory();
-                        for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-                            bc.append(part + " ");
-                            if (all.hasPermission("reportview")) {
-                                all.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Obtain").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason).replace("%sender%", player.getName()));
-                                bc.delete(0, 100);
-                            }
-                        }
+                        sendMessageReported(player, cible, ReportReason);
                         break;
                 }
+        }
+    }
+
+    public void sendMessageReported(Player player, String cible, String ReportReason) {
+        player.sendMessage(SanctionMain.instance.Preffix + SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.sended").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason));
+        player.closeInventory();
+        for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+            bc.append(part + " ");
+            if (all.hasPermission("reportview")) {
+                all.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Obtain").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason).replace("%sender%", player.getName()));
+                bc.delete(0, 100);
+            }
         }
     }
 

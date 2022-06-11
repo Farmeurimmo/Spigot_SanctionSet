@@ -41,7 +41,7 @@ public class ApplySanction {
     }
 
     public void ApplyTempBan(String player, String reason, CommandSender sender, String string, String Expiration, String duration, String type) {
-        if (SanctionMain.instance.getData().getBoolean(player + ".mute.isbanned") == false) {
+        if (!SanctionMain.instance.getData().getBoolean(player + ".mute.isbanned")) {
             SanctionMain.instance.getData().set(player + ".tempban.banner", sender.getName());
             SanctionMain.instance.getData().set(player + ".tempban.reason", reason);
             SanctionMain.instance.getData().set(player + ".tempban.date", string);
@@ -49,19 +49,19 @@ public class ApplySanction {
             SanctionMain.instance.getData().set(player + ".tempban.unit", type);
             long timemillis = System.currentTimeMillis();
             if (type.equalsIgnoreCase("sec")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 1000;
+                timemillis = timemillis + Integer.parseInt(duration) * 1000L;
             }
             if (type.equalsIgnoreCase("min")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 60000;
+                timemillis = timemillis + Integer.parseInt(duration) * 60000L;
             }
             if (type.equalsIgnoreCase("hour")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 360000;
+                timemillis = timemillis + Integer.parseInt(duration) * 360000L;
             }
             if (type.equalsIgnoreCase("day")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 86400000;
+                timemillis = timemillis + Integer.parseInt(duration) * 86400000L;
             }
             if (type.equalsIgnoreCase("year")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 31536000 * 100;
+                timemillis = timemillis + (long) Integer.parseInt(duration) * 31536000 * 100;
             }
             SanctionMain.instance.getData().set(player + ".tempban.duration", duration);
             SanctionMain.instance.getData().set(player + ".tempban.timemillis", timemillis);
@@ -77,26 +77,26 @@ public class ApplySanction {
     }
 
     public void ApplyTempMute(String player, String reason, CommandSender sender, String duration, String type) {
-        if (SanctionMain.instance.getData().getBoolean(player + ".mute.ismuted") == false) {
+        if (!SanctionMain.instance.getData().getBoolean(player + ".mute.ismuted")) {
             SanctionMain.instance.getData().set(player + ".tempmute.banner", sender.getName());
             SanctionMain.instance.getData().set(player + ".tempmute.reason", reason);
             SanctionMain.instance.getData().set(player + ".tempmute.duration", duration);
             SanctionMain.instance.getData().set(player + ".tempmute.unit", type);
             long timemillis = System.currentTimeMillis();
             if (type.equalsIgnoreCase("sec")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 1000;
+                timemillis = timemillis + Integer.parseInt(duration) * 1000L;
             }
             if (type.equalsIgnoreCase("min")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 60000;
+                timemillis = timemillis + Integer.parseInt(duration) * 60000L;
             }
             if (type.equalsIgnoreCase("hour")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 360000;
+                timemillis = timemillis + Integer.parseInt(duration) * 360000L;
             }
             if (type.equalsIgnoreCase("day")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 86400000;
+                timemillis = timemillis + Integer.parseInt(duration) * 86400000L;
             }
             if (type.equalsIgnoreCase("year")) {
-                timemillis = timemillis + Integer.parseInt(duration) * 31536000 * 100;
+                timemillis = timemillis + (long) Integer.parseInt(duration) * 31536000 * 100;
             }
             SanctionMain.instance.getData().set(player + ".tempmute.timemillis", timemillis);
             SanctionMain.instance.getData().set(player + ".tempmute.istempmuted", true);

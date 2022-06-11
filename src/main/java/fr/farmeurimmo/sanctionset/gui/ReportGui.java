@@ -45,7 +45,7 @@ public class ReportGui {
         custom4.setItemMeta(customc);
         inv.setItem(16, custom4);
 
-        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.FillInventoryWithGlassPane") == true) {
+        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.FillInventoryWithGlassPane")) {
             ItemStack custom8 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 0);
             ItemMeta meta8 = custom8.getItemMeta();
             meta8.setDisplayName("§6");

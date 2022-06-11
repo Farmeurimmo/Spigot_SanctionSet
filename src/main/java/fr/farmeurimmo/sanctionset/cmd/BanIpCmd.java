@@ -30,6 +30,7 @@ public class BanIpCmd implements CommandExecutor {
                     sb.append(s).append(' ');
                 }
                 String reason = SanctionMain.instance.getConfig().getString("SanctionSet.Settings.UnkownReasonSpecified").replace("&", "§");
+                assert p != null;
                 if (p != null & p.isOnline()) {
                     p.kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.BanIp.lines").replace("&", "§")
                             .replace("%banner%", sender.getName())
@@ -42,7 +43,7 @@ public class BanIpCmd implements CommandExecutor {
                 Bukkit.getBanList(Type.IP).addBan(p.getAddress().getHostName(), reason,
                         null, sender.getName());
                 return true;
-            } else if (args.length >= 2) {
+            } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 StringBuilder sb = new StringBuilder();
                 for (String s : args) {
@@ -60,7 +61,6 @@ public class BanIpCmd implements CommandExecutor {
                         TimeConverter.getFormatTimeWithTZ(Mydate));
                 return true;
             }
-            return true;
         }
         return true;
     }

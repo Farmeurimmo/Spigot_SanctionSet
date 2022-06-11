@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 public class MuteRevoker {
 
     public static void revokepermamute(String aa, CommandSender sender) {
-        if (SanctionMain.instance.getData().getBoolean(aa + ".mute.ismuted") == true ||
-                SanctionMain.instance.getData().getBoolean(aa + ".tempmute.istempmuted") == true) {
+        if (SanctionMain.instance.getData().getBoolean(aa + ".mute.ismuted") ||
+                SanctionMain.instance.getData().getBoolean(aa + ".tempmute.istempmuted")) {
             SanctionMain.instance.getData().set(aa + ".mute.banner", "");
             SanctionMain.instance.getData().set(aa + ".mute.reason", "");
             SanctionMain.instance.getData().set(aa + ".mute.ismuted", false);

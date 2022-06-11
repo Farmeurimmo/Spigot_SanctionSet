@@ -31,7 +31,7 @@ public class SsGui {
         inv.setItem(11, custom2);
 
         if (player.hasPermission("mod+")) {
-            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForAdmin") == true) {
+            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForAdmin")) {
                 ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                 ItemMeta meta = stack.getItemMeta();
                 ((SkullMeta) meta).setOwner(target);
@@ -53,7 +53,7 @@ public class SsGui {
                 inv.setItem(13, stack);
             }
         } else {
-            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForMod") == true) {
+            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForMod")) {
                 ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                 ItemMeta meta = stack.getItemMeta();
                 ((SkullMeta) meta).setOwner(target);
@@ -107,7 +107,7 @@ public class SsGui {
             inv.setItem(16, custom6);
 
         }
-        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.FillInventoryWithGlassPane") == true) {
+        if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.FillInventoryWithGlassPane")) {
             ItemStack custom8 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 0);
             ItemMeta meta8 = custom8.getItemMeta();
             meta8.setDisplayName("§6");

@@ -18,7 +18,7 @@ public class EndGui {
             Inventory inv = Bukkit.createInventory(null, 27, "§4SanctionSet Unbans/Unmutes");
 
             if (player.hasPermission("mod+")) {
-                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForAdmin") == true) {
+                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForAdmin")) {
                     ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                     ItemMeta meta = stack.getItemMeta();
                     ((SkullMeta) meta).setOwner(cible);
@@ -38,7 +38,7 @@ public class EndGui {
                     inv.setItem(13, stack);
                 }
             } else {
-                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForMod") == true) {
+                if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.IP.ShowIpForMod")) {
                     ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                     ItemMeta meta = stack.getItemMeta();
                     ((SkullMeta) meta).setOwner(cible);
@@ -89,7 +89,7 @@ public class EndGui {
             custom6.setItemMeta(custome);
             inv.setItem(26, custom6);
 
-            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.FillInventoryWithGlassPane") == true) {
+            if (SanctionMain.instance.getConfig().getBoolean("SanctionSet.Settings.FillInventoryWithGlassPane")) {
                 ItemStack custom0 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 0);
                 ItemMeta meta0 = custom0.getItemMeta();
                 meta0.setDisplayName("§6");

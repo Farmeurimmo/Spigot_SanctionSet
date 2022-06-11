@@ -24,7 +24,7 @@ public class TempBanCmd implements CommandExecutor {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));
                 return true;
-            } else if (args.length >= 2) {
+            } else {
                 StringBuilder sb = new StringBuilder();
                 for (String s : args) {
                     sb.append(s).append(' ');
@@ -43,7 +43,7 @@ public class TempBanCmd implements CommandExecutor {
 
                         String aaa = args[1];
                         String type = args[1].replace(cb.toString(), "");
-                        int aaaaaa = 0;
+                        int aaaaaa;
                         LocalDateTime endDate = LocalDateTime.now();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
                         if (aaa.contains("s")) {
@@ -62,14 +62,15 @@ public class TempBanCmd implements CommandExecutor {
                             aaaaaa = Integer.parseInt(aaa.replace("year", ""));
                             endDate = LocalDateTime.now().plusYears(aaaaaa);
                         }
-                        String reason = "";
+                        String reason;
                         if (args.length == 2) {
                             reason = SanctionMain.instance.getConfig().getString("SanctionSet.Settings.UnkownReasonSpecified").replace("&", "§");
                         } else {
                             reason = sb.toString().replace(args[0] + " ", "").replace(args[1] + " ", "").trim();
                         }
                         Player p = Bukkit.getPlayer(args[0]);
-                        if (p != null & p.isOnline()) {
+                        assert p != null;
+                        if (p.isOnline()) {
                             Bukkit.getPlayer(args[0]).kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.TempBan.lines").replace("&", "§")
                                     .replace("%banner%", sender.getName())
                                     .replace("%date%", TimeConverter.getFormatTimeWithTZ(calendar.getTime()))
@@ -82,12 +83,11 @@ public class TempBanCmd implements CommandExecutor {
                         ApplySanction.instance.ApplyTempBan(args[0], reason, sender,
                                 TimeConverter.getFormatTimeWithTZ(Mydate), endDate.format(formatter), args[1].replace(type, ""),
                                 type);
-                        return true;
                     } else {
                         sender.sendMessage(SanctionMain.instance.Preffix +
                                 SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));
-                        return true;
                     }
+                    return true;
                 } else {
                     sender.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempBanArg").replace("&", "§"));

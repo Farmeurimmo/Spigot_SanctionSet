@@ -12,7 +12,7 @@ public class ChatEvent implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void AsyncChat(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
-        if (SanctionMain.instance.getData().getBoolean(e.getPlayer().getName() + ".mute.ismuted") == true) {
+        if (SanctionMain.instance.getData().getBoolean(e.getPlayer().getName() + ".mute.ismuted")) {
             e.setCancelled(true);
             player.sendMessage(SanctionMain.instance.Preffix +
                     SanctionMain.instance.getConfig().getString("SanctionSet.Settings.PermaMutedPlayerChat").replace("&", "§")
@@ -26,7 +26,6 @@ public class ChatEvent implements Listener {
                     SanctionMain.instance.getConfig().getString("SanctionSet.Settings.TempMutedPlayerChat").replace("&", "§")
                             .replace("%player%", player.getName()).replace("%banner%",
                                     SanctionMain.instance.getData().getString(player.getName() + ".tempmute.banner").replace("&", "§")));
-            return;
         }
     }
 

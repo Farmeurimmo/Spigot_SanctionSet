@@ -18,21 +18,20 @@ public class UnBanCmd implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender.hasPermission("unban")) {
-            if (args.length == 0 || args.length >= 2) {
+            if (args.length != 1) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorUnBanArg").replace("&", "§"));
-                return true;
-            } else if (args.length == 1) {
+            } else {
                 BanRevoker.UnTempBan(args[0], sender);
-                return true;
             }
+            return true;
         }
         return false;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ArrayList<String> subcmd = new ArrayList<String>();
+        ArrayList<String> subcmd = new ArrayList<>();
         if (cmd.getName().equalsIgnoreCase("unban")) {
             if (args.length == 1) {
                 for (Player player : Bukkit.getOnlinePlayers()) {

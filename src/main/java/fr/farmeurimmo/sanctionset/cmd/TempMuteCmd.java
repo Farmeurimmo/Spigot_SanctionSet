@@ -15,7 +15,7 @@ public class TempMuteCmd implements CommandExecutor {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorTempMuteArg").replace("&", "§"));
                 return true;
-            } else if (args.length >= 2) {
+            } else {
                 StringBuilder sb = new StringBuilder();
                 for (String s : args) {
                     sb.append(s).append(' ');
@@ -33,7 +33,7 @@ public class TempMuteCmd implements CommandExecutor {
                             || args[1].contains("hour")) {
 
                         String type = args[1];
-                        String reason = "";
+                        String reason;
                         if (args.length == 2) {
                             reason = SanctionMain.instance.getConfig().getString("SanctionSet.Settings.UnkownReasonSpecified").replace("&", "§").trim();
                         } else {

@@ -26,11 +26,12 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                 Date Mydate = new Date(System.currentTimeMillis());
                 Player p = Bukkit.getPlayer(args[0]);
                 String reason = SanctionMain.instance.getConfig().getString("SanctionSet.Settings.UnkownReasonSpecified").replace("&", "§");
+                assert p != null;
                 if (p != null & p.isOnline()) {
                     p.kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Ban.lines").replace("&", "§")
                             .replace("%banner%", sender.getName())
                             .replace("%date%", TimeConverter.getFormatTimeWithTZ(calendar.getTime()))
-                            .replace("%reason%", reason.toString().trim()));
+                            .replace("%reason%", reason.trim()));
                 }
                 StringBuilder sb = new StringBuilder();
                 for (String s : args) {
@@ -39,7 +40,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                 ApplySanction.instance.ApplyPermaBan(p, reason, sender.getName(),
                         TimeConverter.getFormatTimeWithTZ(Mydate));
                 return true;
-            } else if (args.length >= 2) {
+            } else {
                 if (Bukkit.getPlayer(args[0]) != null) {
                     Player p = Bukkit.getPlayer(args[0]);
                     StringBuilder sb = new StringBuilder();
@@ -47,6 +48,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                         sb.append(s).append(' ');
                     }
                     String reason = sb.toString().replace(args[0] + " ", "").trim();
+                    assert p != null;
                     if (p != null & p.isOnline()) {
                         p.kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Ban.lines").replace("&", "§")
                                 .replace("%banner%", sender.getName())
@@ -56,12 +58,11 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                     Date Mydate = new Date(System.currentTimeMillis());
                     ApplySanction.instance.ApplyPermaBan(p, reason, sender.getName(),
                             TimeConverter.getFormatTimeWithTZ(Mydate));
-                    return true;
                 } else {
                     sender.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.InvalidPlayer").replace("&", "§"));
-                    return true;
                 }
+                return true;
             }
         }
         return false;
@@ -69,7 +70,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ArrayList<String> subcmd = new ArrayList<String>();
+        ArrayList<String> subcmd = new ArrayList<>();
         if (cmd.getName().equalsIgnoreCase("ban")) {
             if (args.length == 1) {
                 for (Player player : Bukkit.getOnlinePlayers()) {

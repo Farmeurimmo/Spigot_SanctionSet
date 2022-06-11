@@ -33,15 +33,12 @@ public class SsCmd implements CommandExecutor, TabCompleter {
                         return true;
                     }
                     if (Bukkit.getPlayer(args[0]) != null) {
-                        if (args.length == 1) {
-                            SsGui.SsMainGui(player, args[0]);
-                        }
-                        return true;
+                        SsGui.SsMainGui(player, args[0]);
                     } else {
                         player.sendMessage(SanctionMain.instance.Preffix +
                                 SanctionMain.instance.getConfig().getString("SanctionSet.Settings.InvalidPlayer").replace("&", "§"));
-                        return true;
                     }
+                    return true;
                 } else {
                     player.sendMessage(SanctionMain.instance.Preffix +
                             SanctionMain.instance.getConfig().getString("SanctionSet.Settings.NoPermission").replace("&", "§"));
@@ -54,7 +51,7 @@ public class SsCmd implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ArrayList<String> subcmd = new ArrayList<String>();
+        ArrayList<String> subcmd = new ArrayList<>();
         if (cmd.getName().equalsIgnoreCase("ss") || cmd.getName().equalsIgnoreCase("sanctionset")) {
             if (args.length == 1) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
