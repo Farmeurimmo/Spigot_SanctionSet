@@ -50,7 +50,8 @@ public class BanIpCmd implements CommandExecutor {
                     sb.append(s).append(' ');
                 }
                 String reason = sb.toString().replace(args[0] + " ", "").trim();
-                if (p != null & p.isOnline()) {
+                assert p != null;
+                if (p.isOnline()) {
                     p.kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.BanIp.lines").replace("&", "§")
                             .replace("%banner%", sender.getName())
                             .replace("%date%", TimeConverter.getFormatTimeWithTZ(calendar.getTime()))

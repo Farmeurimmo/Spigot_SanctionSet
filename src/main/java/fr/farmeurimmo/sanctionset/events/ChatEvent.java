@@ -20,7 +20,7 @@ public class ChatEvent implements Listener {
                                     SanctionMain.instance.getData().getString(player.getName() + ".mute.banner").replace("&", "§")));
             return;
         }
-        if (SanctionMain.instance.getData().getBoolean(e.getPlayer().getName() + ".tempmute.istempmuted") == true) {
+        if (SanctionMain.instance.getData().getBoolean(e.getPlayer().getName() + ".tempmute.istempmuted")) {
             e.setCancelled(true);
             player.sendMessage(SanctionMain.instance.Preffix +
                     SanctionMain.instance.getConfig().getString("SanctionSet.Settings.TempMutedPlayerChat").replace("&", "§")

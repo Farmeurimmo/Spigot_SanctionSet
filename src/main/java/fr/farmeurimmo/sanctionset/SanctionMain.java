@@ -37,8 +37,6 @@ public class SanctionMain extends JavaPlugin implements Listener {
         aaa = Bukkit.getServer().getBukkitVersion();
         System.out.println("-----------------------------------------------------------------------------------------------------");
         System.out.println("This server is using: " + aaa);
-        System.out.println("[" + getConfig().getString("SanctionSet.Settings.Prefix.Inconsole") + "] " + getConfig().getString("SanctionSet.Settings.StartMessage"));
-        System.out.println("-----------------------------------------------------------------------------------------------------");
         setup();
         getServer().getPluginManager().registerEvents(new GuiManager(), this);
         getServer().getPluginManager().registerEvents(new JoinLeaveEvent(), this);
@@ -60,10 +58,16 @@ public class SanctionMain extends JavaPlugin implements Listener {
         Preffix = getConfig().getString("SanctionSet.Settings.Prefix.game").replace("&", "§");
 
         for (String a : getData().getConfigurationSection("").getKeys(false)) {
-            if (getData().getBoolean(a + ".ban-ip.isipbanned") == true) {
+            if (getData().getBoolean(a + ".ban-ip.isipbanned")) {
                 ipblocked.put(a, getData().getString(a + ".ban-ip.ip"));
             }
         }
+
+        System.out.println("[" + getConfig().getString("SanctionSet.Settings.Prefix.Inconsole") + "] " + getConfig().getString("SanctionSet.Settings.StartMessage"));
+        System.out.println("Official website : https://reaper.farmeurimmo.fr");
+        System.out.println("-----------------------------------------------------------------------------------------------------");
+
+        checkForUpdate();
     }
 
     @Override
@@ -71,6 +75,25 @@ public class SanctionMain extends JavaPlugin implements Listener {
         System.out.println("-----------------------------------------------------------------------------------------------------");
         System.out.println("[" + getConfig().getString("SanctionSet.Settings.Prefix.Inconsole") + "] " + getConfig().getString("SanctionSet.Settings.StopMessage"));
         System.out.println("-----------------------------------------------------------------------------------------------------");
+    }
+
+    public void checkForUpdate() {
+        new UpdateChecker(this, 89580).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                getLogger().info("§6No update found.");
+            } else {
+                getLogger().warning("A new update is available please consider updating if you want to receive support !");
+                getLogger().info("Newest version: " + version);
+                getLogger().info("Your version: " + this.getDescription().getVersion());
+                getLogger().info("Download link: https://www.spigotmc.org/resources/sanctionset-ss-spigot-java-plugin.89580/");
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.hasPermission("ss.admin")) {
+                        player.sendMessage("§c§lA new update is available please consider updating if you want to receive support !");
+                    }
+                }
+            }
+        });
+        Bukkit.getScheduler().runTaskLater(this, this::checkForUpdate, 20 * 60 * 60);
     }
 
     public void setup() {
@@ -118,10 +141,6 @@ public class SanctionMain extends JavaPlugin implements Listener {
                 players.hidePlayer(pl);
             }
         }
-        Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(SanctionMain.instance, new Runnable() {
-            public void run() {
-                Vanish();
-            }
-        }, 20);
+        Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(SanctionMain.instance, this::Vanish, 20);
     }
 }

@@ -27,7 +27,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                 Player p = Bukkit.getPlayer(args[0]);
                 String reason = SanctionMain.instance.getConfig().getString("SanctionSet.Settings.UnkownReasonSpecified").replace("&", "§");
                 assert p != null;
-                if (p != null & p.isOnline()) {
+                if (p.isOnline()) {
                     p.kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Ban.lines").replace("&", "§")
                             .replace("%banner%", sender.getName())
                             .replace("%date%", TimeConverter.getFormatTimeWithTZ(calendar.getTime()))
@@ -49,7 +49,7 @@ public class BanCmd implements CommandExecutor, TabCompleter {
                     }
                     String reason = sb.toString().replace(args[0] + " ", "").trim();
                     assert p != null;
-                    if (p != null & p.isOnline()) {
+                    if (p.isOnline()) {
                         p.kickPlayer(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Ban.lines").replace("&", "§")
                                 .replace("%banner%", sender.getName())
                                 .replace("%date%", TimeConverter.getFormatTimeWithTZ(calendar.getTime()))

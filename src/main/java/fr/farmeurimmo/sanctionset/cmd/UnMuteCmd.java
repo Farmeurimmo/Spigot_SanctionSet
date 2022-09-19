@@ -21,11 +21,10 @@ public class UnMuteCmd implements CommandExecutor, TabCompleter {
             if (args.length != 1) {
                 sender.sendMessage(SanctionMain.instance.Preffix +
                         SanctionMain.instance.getConfig().getString("SanctionSet.Settings.ErrorUnBanArg").replace("&", "§"));
-                return true;
             } else {
                 MuteRevoker.revokepermamute(args[0], sender);
-                return true;
             }
+            return true;
         }
         return false;
     }

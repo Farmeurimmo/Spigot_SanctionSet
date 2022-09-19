@@ -61,7 +61,7 @@ public class JoinLeaveEvent implements Listener {
 
             SanctionMain.instance.saveData();
         }
-        if (SanctionMain.instance.getData().getBoolean(e.getName() + ".ban-ip.isipbanned") == true) {
+        if (SanctionMain.instance.getData().getBoolean(e.getName() + ".ban-ip.isipbanned")) {
             e.disallow(Result.KICK_BANNED, SanctionMain.instance.getConfig().getString("SanctionSet.Settings.BanIp.lines").replace("&", "§")
                     .replace("%banner%", SanctionMain.instance.getData().getString(e.getName() + ".ban-ip.banner"))
                     .replace("%date%", SanctionMain.instance.getData().getString(e.getName() + ".ban-ip.date").replace("T", " "))
