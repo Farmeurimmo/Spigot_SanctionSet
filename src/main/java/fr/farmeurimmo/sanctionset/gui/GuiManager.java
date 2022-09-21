@@ -29,13 +29,13 @@ public class GuiManager implements Listener {
             return;
         }
 
-        ItemStack cibleitem = event.getInventory().getItem(13);
-        String cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
-
         String title = event.getView().getTitle();
 
         switch (title) {
             case "§4SanctionSet":
+
+                ItemStack cibleitem = event.getInventory().getItem(13);
+                String cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
 
                 event.setCancelled(true);
 
@@ -80,6 +80,9 @@ public class GuiManager implements Listener {
                 break;
             case "§4SanctionSet Mutes":
                 event.setCancelled(true);
+
+                cibleitem = event.getInventory().getItem(13);
+                cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
 
                 if (player.hasPermission("mod")) {
                     switch (currenttype) {
@@ -134,6 +137,9 @@ public class GuiManager implements Listener {
                 break;
             case "§4SanctionSet Bans":
                 event.setCancelled(true);
+
+                cibleitem = event.getInventory().getItem(13);
+                cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
 
                 if (player.hasPermission("mod")) {
 
@@ -200,6 +206,9 @@ public class GuiManager implements Listener {
             case "§4SanctionSet Bans-ip":
                 event.setCancelled(true);
 
+                cibleitem = event.getInventory().getItem(13);
+                cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
+
                 if (player.hasPermission("mod+")) {
 
                     switch (currenttype) {
@@ -227,6 +236,9 @@ public class GuiManager implements Listener {
 
                 if (player.hasPermission("mod+")) {
 
+                    cibleitem = event.getInventory().getItem(13);
+                    cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
+
                     switch (currenttype) {
                         case BOW:
                             player.closeInventory();
@@ -253,6 +265,8 @@ public class GuiManager implements Listener {
                 }
                 break;
             default:
+                cibleitem = event.getInventory().getItem(13);
+                cible = cibleitem.getItemMeta().getDisplayName().replace("§", "").replace("6", "");
                 if (!title.equalsIgnoreCase("§4Report " + cible)) {
                     return;
                 }
@@ -275,7 +289,7 @@ public class GuiManager implements Listener {
         player.sendMessage(SanctionMain.instance.Preffix + SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.sended").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason));
         player.closeInventory();
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-            bc.append(part + " ");
+            bc.append(part).append(" ");
             if (all.hasPermission("reportview")) {
                 all.sendMessage(SanctionMain.instance.getConfig().getString("SanctionSet.Settings.Report.Obtain").replace("&", "§").replace("%player%", cible).replace("%reason%", ReportReason).replace("%sender%", player.getName()));
                 bc.delete(0, 100);
